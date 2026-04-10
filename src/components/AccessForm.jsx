@@ -22,11 +22,11 @@ const AccessForm = ({ usuario }) => {
               className="m-12 w-190"
               id="juegos"
               name="juegoSeleccionado"
+              defaultValue=""
               label="Selecciona un juego"
               variant="outlined"
-              
             >
-              <MenuItem value={"ahorcado"}>Ahorcado</MenuItem>
+              <MenuItem value={""}>Selecciona un juego</MenuItem>
               <MenuItem value={"gato"}>Gato</MenuItem>
               <MenuItem value={"conecta4"}>Conecta 4</MenuItem>
             </Select>

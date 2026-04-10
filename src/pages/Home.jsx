@@ -19,8 +19,8 @@ const Home = () => {
     let ball = { x: 0, y: 0, radius: 6, dx: 3, dy: 2 };
     let paddleLeft = { y: 0, width: 10, height: 80 };
     let paddleRight = { y: 0, width: 10, height: 80 };
-    let leftScore = 0;
-    let rightScore = 0;
+    // let leftScore = 0;
+    // let rightScore = 0;
 
     // Colores (puedes usar las variables CSS de tu paleta)
     const colors = {
@@ -127,10 +127,8 @@ const Home = () => {
 
       // Puntuación y reinicio
       if (ball.x + ball.radius < 0) {
-        rightScore++;
         resetBall("right");
       } else if (ball.x - ball.radius > width) {
-        leftScore++;
         resetBall("left");
       }
     };

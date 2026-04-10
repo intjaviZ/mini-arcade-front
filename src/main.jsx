@@ -6,9 +6,9 @@ import arcadeTheme from "./theme/arcadeTheme.js";
 import { ThemeProvider } from "@mui/material";
 
 createRoot(document.getElementById("root")).render(
-  <ThemeProvider theme={arcadeTheme}>
-    <StrictMode>
-      <App />
-    </StrictMode>
-  </ThemeProvider>,
+  <StrictMode>
+      <ThemeProvider theme={arcadeTheme}>
+        <App />
+      </ThemeProvider>
+  </StrictMode>,
 );
