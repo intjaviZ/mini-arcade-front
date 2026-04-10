@@ -1,1 +1,42 @@
 @import "tailwindcss";
+@import "./styles/theme.css";
+
+body {
+  background-color: var(--arcade-black);
+  color: var(--arcade-cyan);
+  font-family: var(--arcade-font);
+}
+
+.home-label {
+  padding: 24px;
+  margin: 0;
+}
+
+.container-sala{
+  min-width: 220px;
+  font-family: var(--arcade-font, 'Press Start 2P', monospace);
+  background-color: var(--arcade-black);
+  color: var(--arcade-cyan);
+  border: 3px dotted var(--arcade-magenta);
+  padding: 12px 24px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.15s ease-in-out;
+  box-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
+  border-radius: 10px;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 80px;
+}
+
+.m-12{
+  margin: 12px !important;
+}
+
+.w-190{
+  width: 190px !important;
+}

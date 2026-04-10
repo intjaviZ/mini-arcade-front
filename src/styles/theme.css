@@ -1,0 +1,271 @@
+/* ============================================
+   PALETA RETRO ARCADE
+   ============================================ */
+:root {
+  /* Colores base */
+  --arcade-black: #0a0f12;
+  --arcade-magenta: #ff00ff;
+  --arcade-cyan: #00ffff;
+  --arcade-yellow: #ffff00;
+  --arcade-green: #00ff66;
+  --arcade-red: #ff3300;
+
+  /* Colores extendidos */
+  --arcade-blue-midnight: #1a1a2e;
+  --arcade-pink: #ff66cc;
+  --arcade-orange: #ff6600;
+  --arcade-gray: #aaaaaa;
+  --arcade-white: #f0f0f0;
+
+  /* Tipografía recomendada */
+  --arcade-font: 'Press Start 2P', 'Courier New', monospace;
+
+  /* Efectos de neón */
+  --arcade-glow-magenta: 0 0 5px var(--arcade-magenta), 0 0 10px var(--arcade-magenta);
+  --arcade-glow-cyan: 0 0 5px var(--arcade-cyan), 0 0 10px var(--arcade-cyan);
+  --arcade-glow-yellow: 0 0 5px var(--arcade-yellow), 0 0 10px var(--arcade-yellow);
+}
+
+/* ============================================
+   CLASES DE UTILIDAD (opcionales)
+   ============================================ */
+.bg-arcade-dark {
+  background-color: var(--arcade-black);
+}
+.bg-arcade-midnight {
+  background-color: var(--arcade-blue-midnight);
+}
+.text-arcade-cyan {
+  color: var(--arcade-cyan);
+}
+.text-arcade-magenta {
+  color: var(--arcade-magenta);
+}
+.text-arcade-yellow {
+  color: var(--arcade-yellow);
+}
+.text-arcade-green {
+  color: var(--arcade-green);
+}
+.text-arcade-red {
+  color: var(--arcade-red);
+}
+.border-arcade-cyan {
+  border: 2px solid var(--arcade-cyan);
+}
+.border-arcade-magenta {
+  border: 2px solid var(--arcade-magenta);
+}
+.button-arcade {
+  background-color: var(--arcade-magenta);
+  color: var(--arcade-yellow);
+  border: 2px solid var(--arcade-cyan);
+  font-family: var(--arcade-font);
+  text-shadow: var(--arcade-glow-magenta);
+  padding: 12px 24px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+.button-arcade:hover {
+  background-color: var(--arcade-cyan);
+  color: var(--arcade-black);
+  text-shadow: none;
+  transform: scale(1.02);
+}
+.scanlines {
+  position: relative;
+  overflow: hidden;
+}
+.scanlines::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+.neon-text-magenta {
+  text-shadow: var(--arcade-glow-magenta);
+}
+.neon-text-cyan {
+  text-shadow: var(--arcade-glow-cyan);
+}
+
+/* ============================================
+   BOTONES ARCADECON BORDE PUNTEADO
+   ============================================ */
+
+/* Base común para todos los botones arcade punteados */
+.btn-arcade-dotted {
+  font-family: var(--arcade-font, 'Press Start 2P', monospace);
+  background-color: var(--arcade-black);
+  color: var(--arcade-cyan);
+  border: 3px dotted var(--arcade-magenta);
+  padding: 12px 24px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.15s ease-in-out;
+  box-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
+}
+
+/* Efecto 1: Neón + borde punteado brillante al hover */
+.btn-arcade-dotted-neon:hover {
+  border: 3px dotted var(--arcade-yellow);
+  color: var(--arcade-yellow);
+  box-shadow: var(--arcade-glow-magenta), 0 0 15px var(--arcade-yellow);
+  text-shadow: var(--arcade-glow-yellow);
+  transform: scale(1.02);
+}
+
+/* Efecto 2: Parpadeo (blinking) en el borde punteado */
+.btn-arcade-dotted-blink {
+  animation: blinkBorder 1s step-end infinite;
+}
+@keyframes blinkBorder {
+  0%, 100% { border-color: var(--arcade-magenta); }
+  50% { border-color: var(--arcade-cyan); }
+}
+
+/* Efecto 3: Borde punteado que se mueve (efecto "carrera de píxeles") */
+.btn-arcade-dotted-racing {
+  background-color: var(--arcade-blue-midnight);
+  border: 3px dotted transparent;
+  background-clip: padding-box;
+  position: relative;
+}
+.btn-arcade-dotted-racing::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  border: 3px dotted var(--arcade-green);
+  pointer-events: none;
+  animation: dashMove 2s linear infinite;
+}
+@keyframes dashMove {
+  0% { clip-path: inset(0 0 0 0); }
+  100% { clip-path: inset(0 0 0 100%); }
+}
+/* Versión más simple: borde punteado con animación de rotación de sombra */
+.btn-arcade-dotted-spin {
+  border: 3px dotted var(--arcade-magenta);
+  animation: borderGlowSpin 2s infinite alternate;
+}
+@keyframes borderGlowSpin {
+  0% { border-color: var(--arcade-magenta); box-shadow: 0 0 5px var(--arcade-magenta); }
+  100% { border-color: var(--arcade-cyan); box-shadow: 0 0 15px var(--arcade-cyan); }
+}
+
+/* Efecto 4: Pixel shift (como si temblara al hacer hover) */
+.btn-arcade-dotted-shake:hover {
+  animation: pixelShake 0.1s infinite;
+}
+@keyframes pixelShake {
+  0% { transform: translate(1px, 1px); }
+  25% { transform: translate(-1px, 0px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, 1px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Efecto 5: Borde punteado con scanline superpuesto */
+.btn-arcade-dotted-scan {
+  position: relative;
+  overflow: hidden;
+  border: 3px dotted var(--arcade-orange);
+}
+.btn-arcade-dotted-scan::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.2) 0px,
+    rgba(0, 0, 0, 0.2) 2px,
+    transparent 2px,
+    transparent 6px
+  );
+  pointer-events: none;
+}
+.btn-arcade-dotted-scan:hover {
+  animation: scanMove 0.5s linear infinite;
+}
+@keyframes scanMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 8px; }
+}
+
+ /* ============================================
+       CONTENEDOR DEL FONDO PONG
+       ============================================ */
+    .pong-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;  /* Debajo del contenido */
+      background-color: #0a0f12; /* fallback */
+    }
+
+    /* Para que el canvas ocupe todo el contenedor */
+    .pong-background canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;  /* Mantiene proporción sin deformar, recorta si es necesario */
+    }
+
+    /* Opcional: efecto scanline sobre todo el fondo */
+    .pong-background::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.2) 0px,
+        rgba(0, 0, 0, 0.2) 2px,
+        transparent 2px,
+        transparent 6px
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Ejemplo de contenido encima (opcional) */
+    .contenido-encima {
+      position: relative;
+      z-index: 1;
+      color: cyan;
+      font-family: 'Press Start 2P', monospace;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .btn-principal{
+        height: 250px;
+        width: 250px;
+        margin: 50px;
+        padding: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
