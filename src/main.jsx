@@ -4,11 +4,14 @@ import "./index.css";
 import App from "./App.jsx";
 import arcadeTheme from "./theme/arcadeTheme.js";
 import { ThemeProvider } from "@mui/material";
+import RolProvider from "./context/RolContext.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
       <ThemeProvider theme={arcadeTheme}>
-        <App />
+        <RolProvider>
+          <App />
+        </RolProvider>
       </ThemeProvider>
   </StrictMode>,
 );

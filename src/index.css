@@ -1,42 +1,317 @@
 @import "tailwindcss";
 @import "./styles/theme.css";
 
+:root {
+    --arcade-cyan: #00ffff;
+    --arcade-magenta: #ff00ff;
+    --arcade-yellow: #ffff00;
+}
+
 body {
-  background-color: var(--arcade-black);
-  color: var(--arcade-cyan);
-  font-family: var(--arcade-font);
+    width: 100vw;
+    overflow-x: hidden;
+    background-color: var(--arcade-black);
+    color: var(--arcade-cyan);
+    font-family: var(--arcade-font);
 }
 
 .home-label {
-  padding: 24px;
-  margin: 0;
+    margin: 0;
 }
 
-.container-sala{
-  min-width: 220px;
-  font-family: var(--arcade-font, 'Press Start 2P', monospace);
-  background-color: var(--arcade-black);
-  color: var(--arcade-cyan);
-  border: 3px dotted var(--arcade-magenta);
-  padding: 12px 24px;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: all 0.15s ease-in-out;
-  box-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
-  border-radius: 10px;
-  margin: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 80px;
+.container-lobby {
+    font-family: var(--arcade-font, 'Press Start 2P', monospace);
+    background-color: var(--arcade-black);
+    color: var(--arcade-cyan);
+    border: 3px dotted var(--arcade-magenta);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+    border-radius: 20px;
+    padding: 80px;
 }
 
-.m-12{
-  margin: 12px !important;
+.tittle-loby {
+    text-shadow: 0 0 6px var(--arcade-cyan);
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 48px;
 }
 
-.w-190{
-  width: 190px !important;
+.id-lobby {
+    font-size: 48px;
+    margin-bottom: 24px;
+    padding: 32px;
+    color: var(--arcade-yellow);
+    text-shadow: 0 0 6px var(--arcade-yellow);
+}
+
+.container-jugadores {
+    margin-left: 24px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    font-family: var(--arcade-font, 'Press Start 2P', monospace);
+    background-color: var(--arcade-black);
+    color: var(--arcade-cyan);
+    border: 3px dotted var(--arcade-magenta);
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
+    border-radius: 10px;
+    padding: 40px;
+}
+@media screen and (min-width: 1100px) {
+    .container-jugadores {
+        position: absolute;
+        left: 40px;
+        top: 120px;
+        width: 250px;
+    }
+}
+
+.container-tablero {
+    font-family: var(--arcade-font, 'Press Start 2P', monospace);
+    background-color: var(--arcade-black);
+    color: var(--arcade-cyan);
+    border: 3px dotted var(--arcade-magenta);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.15s ease-in-out;
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
+    border-radius: 10px;
+    padding: 40px;
+}
+
+.border-button {
+    font-family: var(--arcade-font, 'Press Start 2P', monospace);
+    background-color: var(--arcade-black);
+    color: var(--arcade-cyan);
+    border: 3px dotted var(--arcade-magenta);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
+    border-radius: 10px;
+    padding: 12px;
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center;
+}
+
+.border-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.cosito {
+    width: 64px;
+    height: 64px;
+    font-family: var(--arcade-font, 'Press Start 2P', monospace);
+    color: var(--arcade-cyan);
+    border: 3px dotted var(--arcade-cyan);
+    cursor: pointer;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 2px;
+    box-shadow: 0 0 3px var(--arcade-cyan);
+    border-radius: 100px;
+    padding: 12px;
+}
+
+@media screen and (max-width: 768px) {
+    .cosito {
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+    }
+}
+
+.cosito-gato {
+    width: 64px;
+    height: 64px;
+    font-family: var(--arcade-font, 'Press Start 2P', monospace);
+    color: rgba(0, 255, 255, 0.3);
+    border: 3px dotted var(--arcade-cyan);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: 0 0 3px var(--arcade-cyan);
+    border-radius: 12px;
+    padding: 12px;
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center;
+}
+
+.turno-activo:hover {
+    border-color: var(--arcade-yellow);
+    box-shadow: 0 0 10px var(--arcade-yellow);
+}
+
+.cosito-gato:hover {
+    border: 3px dotted var(--arcade-yellow);
+    box-shadow: 0 0 3px var(--arcade-yellow);
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.cosito-gato:disabled {
+    transform: scale(1);
+    cursor: not-allowed;
+}
+
+.gato-anfitrion {
+    color: var(--arcade-magenta);
+    text-shadow: 0 0 6px var(--arcade-magenta);
+}
+
+.gato-invitado {
+    color: var(--arcade-cyan);
+    text-shadow: 0 0 6px var(--arcade-cyan);
+}
+
+.gato-anfitrion,
+.gato-invitado {
+    animation: pop 0.2s ease;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.container-sala {
+    min-width: 220px;
+    font-family: var(--arcade-font, 'Press Start 2P', monospace);
+    background-color: var(--arcade-black);
+    color: var(--arcade-cyan);
+    border: 3px dotted var(--arcade-magenta);
+    padding: 12px 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.15s ease-in-out;
+    box-shadow: 0 0 5px rgba(255, 0, 255, 0.3);
+    border-radius: 10px;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+}
+
+.shadow-error-sala {
+    text-shadow: 0 0 6px var(--arcade-cyan);
+}
+
+/* Glow textos */
+.arcade-glow-cyan {
+    color: var(--arcade-cyan);
+    text-shadow: 0 0 8px var(--arcade-cyan);
+}
+
+.arcade-glow-magenta {
+    color: var(--arcade-magenta);
+    text-shadow: 0 0 8px var(--arcade-magenta);
+}
+
+/* Caja estilo arcade */
+.arcade-box {
+    border: 2px dotted var(--arcade-magenta);
+    box-shadow: 0 0 10px var(--arcade-magenta);
+    border-radius: 12px;
+}
+
+/* Botón principal */
+.arcade-button {
+    padding: 10px 20px;
+    border: 2px dotted var(--arcade-cyan);
+    color: var(--arcade-cyan);
+    background: transparent;
+    border-radius: 10px;
+    text-shadow: 0 0 5px var(--arcade-cyan);
+    transition: all 0.2s ease;
+}
+
+.arcade-button:hover {
+    background: var(--arcade-cyan);
+    color: black;
+    box-shadow: 0 0 10px var(--arcade-cyan);
+    transform: scale(1.05);
+}
+
+/* Botón secundario */
+.arcade-button-secondary {
+    padding: 10px 20px;
+    border: 2px dotted var(--arcade-magenta);
+    color: var(--arcade-magenta);
+    background: transparent;
+    border-radius: 10px;
+    text-shadow: 0 0 5px var(--arcade-magenta);
+    transition: all 0.2s ease;
+}
+
+.arcade-button-secondary:hover {
+    background: var(--arcade-magenta);
+    color: black;
+    box-shadow: 0 0 10px var(--arcade-magenta);
+    transform: scale(1.05);
+}
+
+.arcade-link {
+    color: var(--arcade-cyan);
+    text-decoration: none;
+    text-shadow: 0 0 5px var(--arcade-cyan);
+    transition: all 0.2s ease;
+}
+
+.arcade-link:hover {
+    color: var(--arcade-magenta);
+    text-shadow: 0 0 8px var(--arcade-magenta);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: var(--arcade-cyan);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--arcade-cyan);
+    animation: blink 1.2s infinite ease-in-out;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0%, 80%, 100% {
+        opacity: 0.2;
+        transform: scale(0.8);
+    }
+    40% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+.m-12 {
+    margin: 12px !important;
+}
+
+.w-190 {
+    width: 190px !important;
 }

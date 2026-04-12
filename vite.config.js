@@ -7,4 +7,9 @@ export default defineConfig({
     react(),
     tailwindcss(),
   ],
+  server: {
+    allowedHosts: [
+      'thermal-belle-declined-prospects.trycloudflare.com'
+    ]
+  }
 })

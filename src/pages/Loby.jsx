@@ -1,45 +1,42 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useFetcher, useLoaderData, useNavigate } from "react-router-dom";
 import { cerrarSala } from "../services/Sala";
+import { usePolling } from "../hooks/usePolling";
 
 const Loby = () => {
+    const [timeoutExceeded, setTimeoutExceeded] = useState(false);
     const initialSala = useLoaderData();
     const fetcher = useFetcher();
     const navigate = useNavigate();
 
     useEffect(() => {
-        let activo = true;
-        const startTime = Date.now();
+        const timer = setTimeout(() => {
+            setTimeoutExceeded(true);
+            cerrarSala(initialSala.id_sala, initialSala.anfitrion);
+            navigate("/");
+        }, 60000);
 
-        const interval = setInterval(() => {
-            if (!activo) return;
-            const elapsed = Date.now() - startTime;
-            if (elapsed > 60000) {
-                clearInterval(interval);
-                cerrarSala(initialSala.id_sala, initialSala.anfitrion);
-                navigate("/");
-            } else {
-                fetcher.load(`/api/sala-status/${initialSala.id_sala}`);
-            }
-        }, 5000);
+        return () => clearTimeout(timer);
+    }, [initialSala, navigate]);
 
-        return () => {
-            activo = false;
-            clearInterval(interval);
-        }
-    }, [initialSala.id_sala]);
+    const isReady = fetcher.data?.estado === "ready";
+
+    usePolling(() => {
+        fetcher.load(`/api/room/estadoSala/${initialSala.id_sala}`);
+    }, 5000, isReady || timeoutExceeded);
 
     useEffect(() => {
-        if (fetcher.data?.estado === "ready") navigate(`/sala/${initialSala.id_sala}`);
-
-    }, [fetcher.data, navigate, initialSala.id_sala]);
+        if (isReady) {
+            navigate(`/sala/${initialSala.id_sala}?rol=anfitrion`);
+        }
+    }, [isReady, navigate, initialSala.id_sala]);
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-slate-800 text-white">
-            <h1 className="text-3xl font-bold mb-4">Esperando a un rival...</h1>
-            <div className="bg-slate-700 p-8 rounded-xl shadow-2xl text-center">
+        <div className="flex flex-col items-center justify-start pt-36 h-screen">
+            <h1 className="tittle-loby">Esperando a un rival...</h1>
+            <div className="container-lobby text-center">
                 <p className="text-gray-400">Código de la sala</p>
-                <p className="text-5xl font-mono tracking-widest text-yellow-400 mb-6">
+                <p className="id-lobby">
                     {initialSala.id_sala}
                 </p>
                 <p className="text-sm">Juego: {initialSala.tipo_juego}</p>

@@ -1,8 +1,7 @@
-import { Button } from "@mui/material";
 import { useFetcher } from "react-router-dom";
 import Load from "./Load";
 
-const Gato = ({ sala, rol }) => {
+const Conecta4 = ({ sala, rol }) => {
     const moveFetcher = useFetcher();
 
     if (!sala?.juego?.tablero || sala.estado === "ready") return <Load texto="Cargando juego..." />;
@@ -14,17 +13,20 @@ const Gato = ({ sala, rol }) => {
     const jugador = rol === "anfitrion" ? sala.anfitrion : sala.invitado;
     const rival = rol === "invitado" ? sala.anfitrion : sala.invitado;
 
-    const handleClick = (fila, col) => {
+    const hoverColor = rol === "anfitrion" ? "hover:bg-red-500" :
+        rol === "invitado" ? "hover:bg-blue-400" :
+            "hover:bg-white";
+
+    const handleClick = (col) => {
         if (juego.ganador) return;
         if (turno !== jugador || isSubmitting) return;
 
         const formData = new FormData();
         formData.append("id", sala.id_sala);
         formData.append("jugador", jugador);
-        formData.append("x", fila);
-        formData.append("y", col);
+        formData.append("columna", col);
 
-        moveFetcher.submit(formData, { method: "post", action: "/api/game/playGato" });
+        moveFetcher.submit(formData, { method: "post", action: "/api/game/playConecta4" });
     };
 
     return (
@@ -51,25 +53,37 @@ const Gato = ({ sala, rol }) => {
                 }
             </div>
 
-            <div className=" py-16 flex flex-col gap-5 items-center justify-center">
-                {tablero.map((fila, i) => (
-                    <div key={i} className="flex gap-5">
-                        {
-                            fila.map((celda, j) => (
-                                <button className={`cosito-gato ${celda === "X" ? "gato-anfitrion" : celda === "O" ? "gato-invitado" : ""} ${turno === jugador ? "turno-activo" : ""}`} key={j} onClick={() => handleClick(i, j)} style={{
-                                    width: "100px",
-                                    height: "100px",
-                                    fontSize: "32px",
-                                }}
-                                    disabled={turno !== jugador || isSubmitting || juego.ganador}>
-                                    {celda}
-                                </button>
-                            ))}
+            <div className=" m-16 flex flex-col items-center justify-center">
+                <div className="container-tablero">
+                    <div className="flex mb-2.5 gap-2">
+                        {tablero[0].map((_, col) => (
+                            <button
+                                className={`cosito transition-colors ${hoverColor}`}
+                                key={col}
+                                onClick={() => handleClick(col)}
+                                disabled={turno !== jugador || isSubmitting || juego.ganador}
+                            >
+                                ↓
+                            </button>
+                        ))}
                     </div>
-                ))}
+                    <div className="flex flex-col gap-2">
+                        {tablero.map((fila, i) => (
+                            <div key={i} className="flex gap-2">
+                                {fila.map((celda, j) => (
+                                    <div
+                                        className={`w-8 h-8 sm:w-16 sm:h-16 border border-black rounded-full transition-all duration-200 ${celda === "R" ? "bg-red-500" : celda === "A" ? "bg-blue-400" : "bg-white"}`}
+                                        key={j}
+                                    >
+                                    </div>
+                                ))}
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </div>
         </div>
     );
-};
+}
 
-export default Gato;
+export default Conecta4;
