@@ -6,7 +6,7 @@ import Gato from "../components/Gato";
 import Conecta4 from "../components/Conecta4";
 import ReiniciarButton from "../components/ReiniciarButton";
 import CerrarButton from "../components/CerrarButton";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 import ErrorElement from "../components/ErrorElement";
 
 const Sala = () => {

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { cerrarSala } from "../services/Sala";
-import { Button } from "@mui/material";
+import Button from "@mui/material/Button";
 
 const CerrarButton = ({ sala }) => {
     const navigate = useNavigate();

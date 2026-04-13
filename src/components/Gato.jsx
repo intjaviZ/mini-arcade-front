@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import { useFetcher } from "react-router-dom";
 import Load from "./Load";
 

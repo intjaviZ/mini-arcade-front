@@ -1,18 +1,18 @@
+import { lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../layout/Layout";
 import IngresoSala from "../pages/IngresoSala";
 import Home from "../pages/Home";
-import { actionIngreso } from "../services/Ingreso";
-import Sala from "../pages/Sala";
-import Loby from "../pages/Loby";
 import { obtenerEstadoSala } from "../services/Sala";
-import { actionInicioJuego, actionReinicioJuego } from "../services/Game";
+import { actionIngreso } from "../services/Ingreso";
 import { hacerMovimientoGato } from "../services/PlayGato";
 import { hacerMovimientoConecta4 } from "../services/PlayConecta4";
-import NoEncontrado from "../pages/NoEncontrado";
-import ErrorElement from "../components/ErrorElement";
-import AboutUs from "../pages/AboutUs";
-
+import { actionInicioJuego, actionReinicioJuego } from "../services/Game";
+const Sala = lazy(() => import('../pages/Sala'));
+const Loby = lazy(() => import("../pages/Loby"));
+const NoEncontrado = lazy(() => import("../pages/NoEncontrado"));
+const AboutUs = lazy(() => import("../pages/AboutUs"));
+const ErrorElement = lazy(() => import("../components/ErrorElement"));
 
 export const router = createBrowserRouter([
     {
